@@ -87,3 +87,18 @@
 </ul>
 
 
+
+@*
+    Outstanding task => keep it up 
+
+    Think about removing duplication of this code:
+    <figure>
+        <img src="@cars[i].Image" alt="@cars[i].Model From @cars[i].Manufacturer" />
+        <figcaption>@cars[i].Model From @cars[i].Manufacturer</figcaption>
+    </figure>
+
+    These two also:
+    {cars[i].Model} From {cars[i].Manufacturer}
+    {DateTime.Now.Year - cars[i].FirstUseDate.Year}
+
+*@
