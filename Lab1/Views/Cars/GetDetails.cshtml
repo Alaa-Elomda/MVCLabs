@@ -1,0 +1,18 @@
+﻿
+@{
+    var car = Model.car;
+    var status = Model.status;
+}
+
+<div>
+    <p>@($"Name: {car.Model} From {car.Manufacturer}")</p>
+    <p>Usage Duration: @(DateTime.Now.Year - car.FirstUseDate.Year)</p>
+    <p>Description: @Html.Raw(car.HtmlDescription)</p>
+    <p>Image: <figure>
+                  <img src="@car.Image" alt="@car.Model From @car.Manufacturer" />
+                  <figcaption>@car.Model From @car.Manufacturer</figcaption>
+              </figure>
+    </p>
+</div>
+
+<div class="alert-info">From: @status</div>
