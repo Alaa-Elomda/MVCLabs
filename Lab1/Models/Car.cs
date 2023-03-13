@@ -8,6 +8,9 @@
         public string? HtmlDescription { get; set; }
         public DateTime FirstUseDate { get; set; }
 
+        public string Name => $"Name: {Model} From {Manufacturer}";
+        public int Duration => DateTime.Now.Year - FirstUseDate.Year;
+
         public static List<Car> GetCars()
             => new() {
                 new Car

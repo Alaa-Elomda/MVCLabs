@@ -1,16 +1,17 @@
-﻿
+﻿@using Lab1.Controllers;
+@model CarInfo;
 @{
     var car = Model.car;
     var status = Model.status;
 }
 
 <div>
-    <p>@($"Name: {car.Model} From {car.Manufacturer}")</p>
-    <p>Usage Duration: @(DateTime.Now.Year - car.FirstUseDate.Year)</p>
-    <p>Description: @Html.Raw(car.HtmlDescription)</p>
+    <p>@($"Name: {car?.Name}")</p>
+    <p>Usage Duration: @car?.Duration</p>
+    <p>Description: @Html.Raw(car?.HtmlDescription)</p>
     <p>Image: <figure>
-                  <img src="@car.Image" alt="@car.Model From @car.Manufacturer" />
-                  <figcaption>@car.Model From @car.Manufacturer</figcaption>
+                  <img src="@car?.Image" alt="@car?.Name" />
+                  <figcaption>@car?.Name</figcaption>
               </figure>
     </p>
 </div>
