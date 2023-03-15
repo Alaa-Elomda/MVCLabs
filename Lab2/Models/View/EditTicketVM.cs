@@ -4,14 +4,16 @@ using System.Xml.Linq;
 
 namespace Lab2.Models.View
 {
-    public record AddTicketVM
+    public record EditTicketVM
     {
-        
-        [Display(Name = "Is Closed")]
-        public bool IsClosed { get; set; }
-        public Severity Severity { get; set; }
 
-        public string Description { get; set; } = string.Empty;
+        public Guid Id { get; init; }
+
+        [Display(Name = "Is Closed")]
+        public bool IsClosed { get; init; }
+        public Severity Severity { get; init; }
+
+        public string Description { get; init; } = string.Empty;
 
 
         [Display(Name = "Department")]
@@ -23,3 +25,4 @@ namespace Lab2.Models.View
 
     }
 }
+
