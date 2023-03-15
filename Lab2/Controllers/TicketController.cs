@@ -9,15 +9,11 @@ namespace Lab2.Controllers
 {
     public class TicketController : Controller
     {
-        private static readonly List<Ticket> _tickets = new();
+        private static readonly List<Ticket> _tickets = Ticket.GetTickets();
 
-        public IActionResult Index()
-        {
-            return View();
-        }
         public IActionResult GetAll()
         {
-            var tickets = Ticket.GetTickets();
+            var tickets = _tickets;
             return View(tickets);
         }
 
@@ -52,7 +48,7 @@ namespace Lab2.Controllers
                 Department = Department.GetDepartments().FirstOrDefault(d => d.Id == ticketVM.DepartmentId),
                 Developers = selectedDevelopers
             };
-            Ticket.GetTickets().Add(newTicket);
+            _tickets.Add(newTicket);
             return RedirectToAction(nameof(GetAll));
         }
         #endregion
@@ -71,7 +67,7 @@ namespace Lab2.Controllers
                 IsClosed = ticketToEdit.IsClosed,
                 Severity = ticketToEdit.Severity,
                 Description = ticketToEdit.Description,
-                DepartmentId = ticketToEdit.Department.Id,
+                DepartmentId = ticketToEdit.Department?.Id ?? new Guid(),
                 DevelopersIds = ticketToEdit.Developers.Select(t => t.Id).ToList()
 
             };
@@ -104,7 +100,7 @@ namespace Lab2.Controllers
             var ticketToDelete = _tickets.First(t => t.Id == id);
             _tickets.Remove(ticketToDelete);
 
-            return RedirectToAction(nameof(Index));
+            return RedirectToAction(nameof(GetAll));
         }
 
         #endregion
