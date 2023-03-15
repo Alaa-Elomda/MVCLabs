@@ -1,0 +1,30 @@
+﻿@using Lab4.BL;
+@using Lab4.DAL;
+@model TicketAddVM;
+
+
+
+
+<form asp-action="Add" method="post">
+
+
+    <div class="form-group">
+        <label asp-for="Title"></label>
+        <input class="form-control" asp-for="Title" />
+    </div>
+    <div class="form-group">
+        <label asp-for="Description"></label>
+        <input class="form-control" asp-for="Description" />
+    </div>
+    <div class="form-group">
+        <label asp-for="Severity"></label>
+        <select asp-for="Severity" asp-items="Html.GetEnumSelectList<Severity>()"></select>
+    </div>
+
+
+
+
+
+    <button class="btn btn-secondary"> Submit </button>
+
+</form>

@@ -1,0 +1,36 @@
+﻿@using Lab4.BL;
+@model List<TicketReadVM>;
+
+@{
+    var tickets = Model;
+}
+<table class="table">
+    <tr>
+        <th>Ticket ID</th>
+        <th>Ticket Title</th>
+        <th>Severity</th>
+        <th>Description</th>
+
+    </tr>
+    @foreach (var ticket in tickets)
+    {
+        <tr>
+            <td><a href="/tickets/getdetails/@ticket.Id">@ticket.Id</a></td>
+            <td>@ticket.Title</td>
+            <td>@ticket.Severity</td>
+            <td>@ticket.Description</td>
+            <td>
+                <button class="btn btn-dark">
+                    <a class="text-white text-decoration-none" href="/tickets/edit/@ticket.Id">Edit</a>
+                </button>
+            </td>
+            <td>
+                <form action="Delete/@ticket.Id" method="post">
+                    <button class="btn btn-dark">
+                        Delete
+                    </button>
+                </form>
+            </td>
+        </tr>
+    }
+</table>
