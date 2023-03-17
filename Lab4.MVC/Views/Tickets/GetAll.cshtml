@@ -10,6 +10,8 @@
         <th>Ticket Title</th>
         <th>Severity</th>
         <th>Description</th>
+        <th>Department Name</th>
+        <th>Developers Count</th>
 
     </tr>
     @foreach (var ticket in tickets)
@@ -19,6 +21,8 @@
             <td>@ticket.Title</td>
             <td>@ticket.Severity</td>
             <td>@ticket.Description</td>
+            <td>@ticket.DepartmentName</td>
+            <td>@ticket.DevelopersCount</td>
             <td>
                 <button class="btn btn-dark">
                     <a class="text-white text-decoration-none" href="/tickets/edit/@ticket.Id">Edit</a>

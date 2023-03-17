@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 
 namespace Lab4.BL;
 
-public record TicketEditVM (int Id, string Title, string Description, Severity Severity)
+public record TicketEditVM (int Id, string Title, string Description, Severity Severity, int DepartmentId,
+    int[] DevelopersIds)
 {
 }

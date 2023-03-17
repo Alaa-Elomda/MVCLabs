@@ -20,6 +20,15 @@
         <label asp-for="Severity"></label>
         <select asp-for="Severity" asp-items="Html.GetEnumSelectList<Severity>()"></select>
     </div>
+    <div>
+        <label asp-for="DepartmentId"></label>
+        <select asp-for="DepartmentId" asp-items="ViewBag.Departments"></select>
+    </div>
+    <div>
+        <label asp-for="DevelopersIds"></label>
+        <select asp-for="DevelopersIds" asp-items="ViewBag.Developers"></select>
+    </div>
+
 
 
 

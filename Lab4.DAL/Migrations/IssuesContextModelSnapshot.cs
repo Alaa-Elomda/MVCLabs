@@ -21,6 +21,108 @@ namespace Lab4.DAL.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
+            modelBuilder.Entity("DeveloperTicket", b =>
+                {
+                    b.Property<int>("DevelopersId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("TicketsId")
+                        .HasColumnType("int");
+
+                    b.HasKey("DevelopersId", "TicketsId");
+
+                    b.HasIndex("TicketsId");
+
+                    b.ToTable("DeveloperTicket");
+                });
+
+            modelBuilder.Entity("Lab4.DAL.Department", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Departments");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Name = "Automotive & Baby"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Name = "Beauty & Health"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            Name = "Electronics"
+                        });
+                });
+
+            modelBuilder.Entity("Lab4.DAL.Developer", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("FirstName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("LastName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Developers");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            FirstName = "Freddie",
+                            LastName = "Johnson"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            FirstName = "Sophia",
+                            LastName = "O'Keefe"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            FirstName = "Angela",
+                            LastName = "McClure"
+                        },
+                        new
+                        {
+                            Id = 4,
+                            FirstName = "Jamie",
+                            LastName = "Berge"
+                        },
+                        new
+                        {
+                            Id = 5,
+                            FirstName = "Geoffrey",
+                            LastName = "Abbott"
+                        });
+                });
+
             modelBuilder.Entity("Lab4.DAL.Ticket", b =>
                 {
                     b.Property<int>("Id")
@@ -28,6 +130,9 @@ namespace Lab4.DAL.Migrations
                         .HasColumnType("int");
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("DepartmentId")
+                        .HasColumnType("int");
 
                     b.Property<string>("Description")
                         .IsRequired()
@@ -42,12 +147,15 @@ namespace Lab4.DAL.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("DepartmentId");
+
                     b.ToTable("Tickets");
 
                     b.HasData(
                         new
                         {
                             Id = 20,
+                            DepartmentId = 1,
                             Description = "Harum hic impedit dolore voluptate placeat.",
                             Severity = 1,
                             Title = "in"
@@ -55,6 +163,7 @@ namespace Lab4.DAL.Migrations
                         new
                         {
                             Id = 1,
+                            DepartmentId = 2,
                             Description = "Rerum totam est quo possimus sunt sunt ad.",
                             Severity = 0,
                             Title = "id"
@@ -62,6 +171,7 @@ namespace Lab4.DAL.Migrations
                         new
                         {
                             Id = 2,
+                            DepartmentId = 3,
                             Description = "Id cumque explicabo beatae.",
                             Severity = 1,
                             Title = "dicta"
@@ -69,6 +179,7 @@ namespace Lab4.DAL.Migrations
                         new
                         {
                             Id = 3,
+                            DepartmentId = 3,
                             Description = "Consectetur beatae dolorem voluptates occaecati.",
                             Severity = 0,
                             Title = "eius"
@@ -76,6 +187,7 @@ namespace Lab4.DAL.Migrations
                         new
                         {
                             Id = 4,
+                            DepartmentId = 3,
                             Description = "Nulla est doloribus ut non aspernatur vero dolores.",
                             Severity = 2,
                             Title = "assumenda"
@@ -83,6 +195,7 @@ namespace Lab4.DAL.Migrations
                         new
                         {
                             Id = 5,
+                            DepartmentId = 2,
                             Description = "Et praesentium est ipsum eligendi rerum itaque voluptate quia.",
                             Severity = 1,
                             Title = "ex"
@@ -90,6 +203,7 @@ namespace Lab4.DAL.Migrations
                         new
                         {
                             Id = 6,
+                            DepartmentId = 3,
                             Description = "Optio non debitis ut molestiae dolorem ad.",
                             Severity = 2,
                             Title = "velit"
@@ -97,6 +211,7 @@ namespace Lab4.DAL.Migrations
                         new
                         {
                             Id = 7,
+                            DepartmentId = 1,
                             Description = "Dolor quae iure quas error est.",
                             Severity = 2,
                             Title = "voluptas"
@@ -104,6 +219,7 @@ namespace Lab4.DAL.Migrations
                         new
                         {
                             Id = 8,
+                            DepartmentId = 2,
                             Description = "Iste molestiae aut inventore necessitatibus necessitatibus perspiciatis sit.",
                             Severity = 2,
                             Title = "recusandae"
@@ -111,6 +227,7 @@ namespace Lab4.DAL.Migrations
                         new
                         {
                             Id = 9,
+                            DepartmentId = 2,
                             Description = "Voluptas expedita placeat ad sint consequuntur.",
                             Severity = 0,
                             Title = "qui"
@@ -118,6 +235,7 @@ namespace Lab4.DAL.Migrations
                         new
                         {
                             Id = 10,
+                            DepartmentId = 1,
                             Description = "Voluptates qui sed aliquid laudantium in.",
                             Severity = 0,
                             Title = "autem"
@@ -125,6 +243,7 @@ namespace Lab4.DAL.Migrations
                         new
                         {
                             Id = 11,
+                            DepartmentId = 3,
                             Description = "Placeat non repellat qui libero.",
                             Severity = 1,
                             Title = "totam"
@@ -132,6 +251,7 @@ namespace Lab4.DAL.Migrations
                         new
                         {
                             Id = 12,
+                            DepartmentId = 3,
                             Description = "Debitis vero laborum asperiores deserunt nihil tempora quia.",
                             Severity = 2,
                             Title = "enim"
@@ -139,6 +259,7 @@ namespace Lab4.DAL.Migrations
                         new
                         {
                             Id = 13,
+                            DepartmentId = 1,
                             Description = "Voluptatibus a et natus ipsa at quis rem dolores.",
                             Severity = 0,
                             Title = "natus"
@@ -146,6 +267,7 @@ namespace Lab4.DAL.Migrations
                         new
                         {
                             Id = 14,
+                            DepartmentId = 1,
                             Description = "Dolorem qui animi sint ad facere ut ullam voluptatem repellendus.",
                             Severity = 1,
                             Title = "et"
@@ -153,6 +275,7 @@ namespace Lab4.DAL.Migrations
                         new
                         {
                             Id = 15,
+                            DepartmentId = 2,
                             Description = "Sint suscipit delectus accusamus distinctio earum aliquam.",
                             Severity = 2,
                             Title = "aut"
@@ -160,6 +283,7 @@ namespace Lab4.DAL.Migrations
                         new
                         {
                             Id = 16,
+                            DepartmentId = 2,
                             Description = "Et vel tempora.",
                             Severity = 0,
                             Title = "et"
@@ -167,6 +291,7 @@ namespace Lab4.DAL.Migrations
                         new
                         {
                             Id = 17,
+                            DepartmentId = 2,
                             Description = "Aut atque officiis numquam mollitia voluptas dolore.",
                             Severity = 1,
                             Title = "iusto"
@@ -174,6 +299,7 @@ namespace Lab4.DAL.Migrations
                         new
                         {
                             Id = 18,
+                            DepartmentId = 3,
                             Description = "Ipsum mollitia sit officiis sapiente natus.",
                             Severity = 2,
                             Title = "facere"
@@ -181,10 +307,42 @@ namespace Lab4.DAL.Migrations
                         new
                         {
                             Id = 19,
+                            DepartmentId = 1,
                             Description = "Inventore aut reprehenderit vitae ratione dolorum harum.",
                             Severity = 2,
                             Title = "recusandae"
                         });
+                });
+
+            modelBuilder.Entity("DeveloperTicket", b =>
+                {
+                    b.HasOne("Lab4.DAL.Developer", null)
+                        .WithMany()
+                        .HasForeignKey("DevelopersId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Lab4.DAL.Ticket", null)
+                        .WithMany()
+                        .HasForeignKey("TicketsId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("Lab4.DAL.Ticket", b =>
+                {
+                    b.HasOne("Lab4.DAL.Department", "Department")
+                        .WithMany("Tickets")
+                        .HasForeignKey("DepartmentId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Department");
+                });
+
+            modelBuilder.Entity("Lab4.DAL.Department", b =>
+                {
+                    b.Navigation("Tickets");
                 });
 #pragma warning restore 612, 618
         }

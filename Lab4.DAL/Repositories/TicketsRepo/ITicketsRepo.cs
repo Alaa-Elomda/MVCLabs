@@ -15,6 +15,9 @@ public interface ITicketsRepo
     void Delete(int id);
     int SaveChanges();
 
+    Ticket? GetTicketWithDevelopersAndDepartment(int id);
+    Ticket? GetTicketWithDevelopers(int id);
+
 
 
 }

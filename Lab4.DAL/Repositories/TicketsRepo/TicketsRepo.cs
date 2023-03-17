@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -28,12 +29,28 @@ public class TicketsRepo : ITicketsRepo
 
     public IEnumerable<Ticket> GetAll()
     {
-        return _context.Set<Ticket>();
+        return _context.Set<Ticket>()
+            .Include(t => t.Department)
+            .Include(t => t.Developers);
+    }
+    Ticket? ITicketsRepo.GetTicketWithDevelopersAndDepartment(int id)
+    {
+        return _context.Set<Ticket>()
+    .Include(t => t.Department)
+    .Include(t => t.Developers)
+    .FirstOrDefault(t => t.Id == id);
+    }
+
+    Ticket? ITicketsRepo.GetTicketWithDevelopers(int id)
+    {
+        return _context.Set<Ticket>()
+             .Include(t => t.Developers)
+             .FirstOrDefault(t => t.Id == id);
     }
 
     public void Update(Ticket ticket)
     {
-        
+
     }
 
     public void Delete(int id)
@@ -50,6 +67,8 @@ public class TicketsRepo : ITicketsRepo
     {
         return _context.SaveChanges();
     }
+
+
 
 
 }

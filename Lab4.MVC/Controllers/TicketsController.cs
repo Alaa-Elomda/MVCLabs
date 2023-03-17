@@ -8,10 +8,16 @@ namespace Lab4.MVC.Controllers
     public class TicketsController : Controller
     {
         private readonly ITicketsManager _ticketsManager;
+        private readonly IDepartmentsManager _departmentsManager;
+        private readonly IDevelopersManager _developersManager;
 
-        public TicketsController(ITicketsManager ticketsManager)
+        public TicketsController(ITicketsManager ticketsManager,
+                                 IDepartmentsManager departmentsManager, 
+                                 IDevelopersManager developersManager)
         {
             _ticketsManager = ticketsManager;
+            _departmentsManager = departmentsManager;
+            _developersManager = developersManager;
         }
         public IActionResult Index()
         {
@@ -31,11 +37,14 @@ namespace Lab4.MVC.Controllers
                 View("NotFoundDeveloper");
             }
             return View(ticket);
+
         }
 
         [HttpGet]
         public IActionResult Add()
         {
+            ViewBag.Departments = _departmentsManager.GetDepartmentsListItems();
+            ViewBag.Developers = _developersManager.GetDevelopersListItems();
             return View();
         }
 
@@ -50,14 +59,17 @@ namespace Lab4.MVC.Controllers
         public IActionResult Edit(int id)
         {
             var ticket = _ticketsManager.GetToEdit(id);
+            ViewBag.Departments = _departmentsManager.GetDepartmentsListItems();
+            ViewBag.Developers = _developersManager.GetDevelopersListItems();
             return View(ticket);
+
         }
 
         [HttpPost]
         public IActionResult Edit(TicketEditVM ticketVM)
         {
             _ticketsManager.Edit(ticketVM);
-            return RedirectToAction(nameof(GetAll));
+            return RedirectToAction(nameof(GetAll), new { id = ticketVM.Id });
         }
 
         [HttpPost]
