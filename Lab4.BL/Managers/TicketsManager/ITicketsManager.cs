@@ -18,7 +18,7 @@ public interface ITicketsManager
 
     void Delete(TicketEditVM ticket);
     public bool TitleCheck(string title);
-    public bool SaveImage(IFormFile image, ModelStateDictionary modelState, out string imageName);
+    public bool TrySaveImage(IFormFile image, ModelStateDictionary modelState, out string imageName);
 
 
 }

@@ -55,7 +55,7 @@ namespace Lab4.MVC.Controllers
         [HttpPost]
         public IActionResult Add(TicketAddVM ticket)
         {
-            if (!_ticketsManager.SaveImage(ticket.Image, ModelState, out string imageName))
+            if (!_ticketsManager.TrySaveImage(ticket.Image, ModelState, out string imageName))
             {
                 return View();
             }
@@ -82,16 +82,14 @@ namespace Lab4.MVC.Controllers
         [HttpPost]
         public IActionResult Edit(TicketEditVM ticketVM)
         {   
-            if (_ticketsManager.SaveImage(ticketVM.Image, ModelState, out string imageName))
+            if (_ticketsManager.TrySaveImage(ticketVM.Image, ModelState, out string imageName))
             {
                 ticketVM.ImagePath = imageName;
                 _ticketsManager.Edit(ticketVM);
                 return RedirectToAction(nameof(GetAll), new { id = ticketVM.Id });
             }
-            else
-            {
-                return View(ticketVM);
-            }
+
+            return View(ticketVM);
         }
         #endregion
 

@@ -126,13 +126,12 @@ public class TicketsManager : ITicketsManager
     #region Title Validation
     public bool TitleCheck(string title)
     {
-        return _ticketsRepo.GetAll()
-                       .Any(t => t.Title == title);
+        return _ticketsRepo.TicketExists(title);
     }
     #endregion
 
     #region Handel Image
-    public bool SaveImage(IFormFile image, ModelStateDictionary modelState, out string imageName)
+    public bool TrySaveImage(IFormFile image, ModelStateDictionary modelState, out string imageName)
     {
         ImagesOptions imagesOptions = _imagesOptionsMonitor.CurrentValue;
         imageName = null;

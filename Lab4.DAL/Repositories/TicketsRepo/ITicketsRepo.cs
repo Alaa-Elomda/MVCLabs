@@ -17,6 +17,8 @@ public interface ITicketsRepo
 
     Ticket? GetTicketWithDevelopersAndDepartment(int id);
     Ticket? GetTicketWithDevelopers(int id);
+    public bool TicketExists(string title);
+
 
 
 

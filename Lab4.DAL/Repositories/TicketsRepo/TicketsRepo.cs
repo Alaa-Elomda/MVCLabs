@@ -69,6 +69,12 @@ public class TicketsRepo : ITicketsRepo
         return _context.SaveChanges();
     }
 
+    public bool TicketExists(string title)
+    {
+        return _context.Set<Ticket>()
+            .Any(t => t.Title == title);
+    }
+
 
 
 
