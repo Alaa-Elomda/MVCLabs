@@ -18,7 +18,9 @@ public class Ticket
     public string Description { get; set; } = string.Empty;
     public Severity Severity { get; set; }
 
-   
+    public string? Image { set; get; }
+
+
     public int DepartmentId { get; set; }
     public Department? Department { get; set; }
     public ICollection<Developer> Developers { get; set; } = new HashSet<Developer>();

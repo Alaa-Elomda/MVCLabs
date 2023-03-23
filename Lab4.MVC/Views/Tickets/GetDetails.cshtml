@@ -47,6 +47,12 @@
         <dd class="col-sm-10">
             @Html.DisplayFor(model => model.DevelopersCount)
         </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Image)
+        </dt>
+        <dd class="col-sm-10">
+            <img class="img-fluid w-25" src="/images/@(Model.Image)" />
+        </dd>
 
 
     </dl>

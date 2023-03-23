@@ -33,6 +33,7 @@ public class TicketsRepo : ITicketsRepo
             .Include(t => t.Department)
             .Include(t => t.Developers);
     }
+
     Ticket? ITicketsRepo.GetTicketWithDevelopersAndDepartment(int id)
     {
         return _context.Set<Ticket>()

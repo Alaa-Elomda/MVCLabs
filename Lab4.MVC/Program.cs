@@ -1,7 +1,7 @@
 using Lab4.DAL;
 using Lab4.BL;
 using Microsoft.EntityFrameworkCore;
-
+using Lab4.MVC;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -19,6 +19,9 @@ builder.Services.AddScoped<IDepartmentsRepo, DepartmentsRepo>();
 builder.Services.AddScoped<ITicketsManager, TicketsManager>();
 builder.Services.AddScoped<IDepartmentsManager, DepartmentsManager>();
 builder.Services.AddScoped<IDevelopersManager, DevelopersManager>();
+
+builder.Services.Configure<ImagesOptions>(
+    builder.Configuration.GetSection("ImagesOptions"));
 
 var app = builder.Build();
 

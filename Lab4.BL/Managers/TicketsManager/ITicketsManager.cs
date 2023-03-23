@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc.ModelBinding;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -15,5 +17,8 @@ public interface ITicketsManager
     void Edit(TicketEditVM ticket);
 
     void Delete(TicketEditVM ticket);
+    public bool TitleCheck(string title);
+    public bool SaveImage(IFormFile image, ModelStateDictionary modelState, out string imageName);
+
 
 }

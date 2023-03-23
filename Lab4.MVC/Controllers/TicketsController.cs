@@ -1,6 +1,8 @@
 ﻿using Lab4.BL;
 using Lab4.DAL;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.ModelBinding;
+using System.Linq;
 using System.Net.Sockets;
 
 namespace Lab4.MVC.Controllers
@@ -23,7 +25,7 @@ namespace Lab4.MVC.Controllers
         {
             return View();
         }
-
+        #region GET
         public IActionResult GetAll()
         {
             return View(_ticketsManager.GetAll());
@@ -39,7 +41,9 @@ namespace Lab4.MVC.Controllers
             return View(ticket);
 
         }
+        #endregion
 
+        #region ADD
         [HttpGet]
         public IActionResult Add()
         {
@@ -51,10 +55,20 @@ namespace Lab4.MVC.Controllers
         [HttpPost]
         public IActionResult Add(TicketAddVM ticket)
         {
-            _ticketsManager.Add(ticket);
-            return RedirectToAction(nameof(GetAll));
-        }
+            if (!_ticketsManager.SaveImage(ticket.Image, ModelState, out string imageName))
+            {
+                return View();
+            }
 
+            ticket.ImagePath = imageName;
+            _ticketsManager.Add(ticket);
+
+            return RedirectToAction(nameof(GetAll));
+
+        }
+        #endregion
+
+        #region EDIT
         [HttpGet]
         public IActionResult Edit(int id)
         {
@@ -67,16 +81,39 @@ namespace Lab4.MVC.Controllers
 
         [HttpPost]
         public IActionResult Edit(TicketEditVM ticketVM)
-        {
-            _ticketsManager.Edit(ticketVM);
-            return RedirectToAction(nameof(GetAll), new { id = ticketVM.Id });
+        {   
+            if (_ticketsManager.SaveImage(ticketVM.Image, ModelState, out string imageName))
+            {
+                ticketVM.ImagePath = imageName;
+                _ticketsManager.Edit(ticketVM);
+                return RedirectToAction(nameof(GetAll), new { id = ticketVM.Id });
+            }
+            else
+            {
+                return View(ticketVM);
+            }
         }
+        #endregion
 
+        #region DELETE
         [HttpPost]
         public IActionResult Delete(TicketEditVM ticketVM)
         {
             _ticketsManager.Delete(ticketVM);
             return RedirectToAction(nameof(GetAll));
         }
+        #endregion
+
+        #region Remote Title
+        public IActionResult ValidateTitle(string title)
+        {
+            if (_ticketsManager.TitleCheck(title))
+            {
+                return Json($"{title} is taken");
+            }
+            return Json(true);
+        }
+        #endregion
+
     }
 }
