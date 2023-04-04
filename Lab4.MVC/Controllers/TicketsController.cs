@@ -1,5 +1,6 @@
 ﻿using Lab4.BL;
 using Lab4.DAL;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
 using System.Linq;
@@ -26,6 +27,8 @@ namespace Lab4.MVC.Controllers
             return View();
         }
         #region GET
+        
+        [Authorize]
         public IActionResult GetAll()
         {
             return View(_ticketsManager.GetAll());
@@ -45,6 +48,7 @@ namespace Lab4.MVC.Controllers
 
         #region ADD
         [HttpGet]
+        [Authorize]
         public IActionResult Add()
         {
             ViewBag.Departments = _departmentsManager.GetDepartmentsListItems();
@@ -53,6 +57,7 @@ namespace Lab4.MVC.Controllers
         }
 
         [HttpPost]
+        [Authorize]
         public IActionResult Add(TicketAddVM ticket)
         {
             if (!_ticketsManager.TrySaveImage(ticket.Image, ModelState, out string imageName))
@@ -70,6 +75,7 @@ namespace Lab4.MVC.Controllers
 
         #region EDIT
         [HttpGet]
+        [Authorize]
         public IActionResult Edit(int id)
         {
             var ticket = _ticketsManager.GetToEdit(id);
@@ -80,6 +86,7 @@ namespace Lab4.MVC.Controllers
         }
 
         [HttpPost]
+        [Authorize]
         public IActionResult Edit(TicketEditVM ticketVM)
         {   
             if (_ticketsManager.TrySaveImage(ticketVM.Image, ModelState, out string imageName))
@@ -95,6 +102,7 @@ namespace Lab4.MVC.Controllers
 
         #region DELETE
         [HttpPost]
+        [Authorize]
         public IActionResult Delete(TicketEditVM ticketVM)
         {
             _ticketsManager.Delete(ticketVM);

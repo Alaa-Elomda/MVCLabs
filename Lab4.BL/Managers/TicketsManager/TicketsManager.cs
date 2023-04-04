@@ -148,7 +148,7 @@ public class TicketsManager : ITicketsManager
             return false;
         }
 
-        var allowedExtensions = imagesOptions.Allowed.Split(',');
+        var allowedExtensions = imagesOptions!.Allowed!.Split(',');
         var sentExtension = Path.GetExtension(image.FileName).ToLower();
 
         if (!allowedExtensions.Contains(sentExtension))

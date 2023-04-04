@@ -1,0 +1,33 @@
+﻿@model RegisterDto
+
+<form asp-action="Register" method="post">
+
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+    <div class="form-group m-5">
+        <label asp-for="UserName"></label>
+        <input class="form-control" asp-for="UserName" />
+    </div>
+
+    <div class="form-group m-5">
+        <label asp-for="Password"></label>
+        <input class="form-control" asp-for="Password" />
+    </div>
+
+    <div class="form-group m-5">
+        <label asp-for="Email"></label>
+        <input class="form-control" asp-for="Email" />
+    </div>
+
+    <div class="form-group m-5">
+        <label asp-for="DOB"></label>
+        <input class="form-control" asp-for="DOB" />
+    </div>
+
+    <button class="btn btn-primary m-5" >Submit</button>
+</form>
+
+@section Scripts{
+    <script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
+    <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
+    }
